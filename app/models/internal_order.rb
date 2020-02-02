@@ -84,6 +84,7 @@ class InternalOrder
 
             parsedPhone = "00000000000"
 
+            # Gets the buyer phone and convert it to the expected format
             if !order.buyer.phone.nil?
                 phone = order.buyer.phone
                 number = phone.number.to_s
@@ -97,6 +98,11 @@ class InternalOrder
                 code = code.gsub(' ', '')
                 code = code.gsub('(', '')
                 code = code.gsub(')', '')
+
+                # Remove the area code from the number if necessary
+                if(number[0..1] == code && number.length > 10)
+                    number = number.sub(code, '')
+                end 
 
                 parsedPhone = code.concat(number)      
             end
