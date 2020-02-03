@@ -20,9 +20,7 @@ class InternalOrder
                   :customer,
                   :items,
                   :payments
-end
 
-class InternalOrder
     def initialize
         @externalCode = ""
         @storeId = -1
@@ -46,10 +44,8 @@ class InternalOrder
         @items = Array.new
         @payments = Array.new
     end
-end
 
-class InternalOrder
-    def initialize(order)
+    def parse(order)
         begin
             # Check if the Json contains the attribute and if it is not null
             @externalCode = !order.id.nil? ? order.id : 0
@@ -60,9 +56,9 @@ class InternalOrder
             @deliveryFee = !order.total_shipping.nil? ? order.total_shipping : 0.0
 
             address = order.shipping.receiver_address
-            @country = !address.store_id.nil? ? address.country.id : ""
-            @state = !address.name.nil? ? address.state.name : ""
-            @city = !address.name.nil? ? address.city.name : ""
+            @country = !address.country.nil? ? address.country.id : ""
+            @state = !address.state.nil? ? address.state.name : ""
+            @city = !address.city.nil? ? address.city.name : ""
             @district = !address.neighborhood.nil? ? address.neighborhood.name : ""
             @street = !address.street_name.nil? ? address.street_name : ""
             @number = !address.street_number.nil? ? address.street_number : ""

@@ -11,14 +11,15 @@ class ApplicationController < ActionController::API
 
         begin
             orderJson = JSON.parse(params.to_json, object_class: OpenStruct)
-            parsedOrder = InternalOrder.new(orderJson)
+            parsedOrder = InternalOrder.new
+            parsedOrder.parse(orderJson)            
 
-            url = "https://64f4ec24-eed6-451d-b4bb-72b09db86a1c.mock.pstmn.io/api/test" #"https://delivery-center-recruitment-ap.herokuapp.com/")
+            url = "https://55ef49cd-24d9-490d-912f-0107388e1664.mock.pstmn.io/api/teste"#"https://delivery-center-recruitment-ap.herokuapp.com/"
             headers = {"X-Sent" => Time.now.strftime("%Hh%M - %d/%m/%Y")}
 
             result = RestClient.post(url, parsedOrder.to_json, headers)
 
-            render json:{data: parsedOrder, status: 200}
+            render json:{data: parsedOrder}
         
         rescue => exception
             render json: { error: "Erro! Não foi possivel realizar a operação.\n#{exception}", status: 500}
