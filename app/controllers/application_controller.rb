@@ -4,7 +4,7 @@ require 'rest-client'
 class ApplicationController < ActionController::API
 
     def get
-        render json: "Application Controller > It's on!",status: :ok
+        render json: "Application Controller > It's on!", status: :ok
     end
     
     def parse_order
