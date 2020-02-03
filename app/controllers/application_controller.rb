@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
             parsedOrder.parse(orderJson)            
 
             url = "https://delivery-center-recruitment-ap.herokuapp.com/"
-            headers = {"X-Sent" => Time.now.strftime("%Hh%M - %d/%m/%Y")}
+            headers = {"X-Sent" => Time.now.strftime("%Hh%M - %d/%m/%y")}
 
             result = RestClient.post(url, parsedOrder.to_json, headers)
 
