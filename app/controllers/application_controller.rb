@@ -14,7 +14,7 @@ class ApplicationController < ActionController::API
             parsedOrder = InternalOrder.new
             parsedOrder.parse(orderJson)            
 
-            url = "https://55ef49cd-24d9-490d-912f-0107388e1664.mock.pstmn.io/api/teste"#"https://delivery-center-recruitment-ap.herokuapp.com/"
+            url = "https://delivery-center-recruitment-ap.herokuapp.com/"
             headers = {"X-Sent" => Time.now.strftime("%Hh%M - %d/%m/%Y")}
 
             result = RestClient.post(url, parsedOrder.to_json, headers)
